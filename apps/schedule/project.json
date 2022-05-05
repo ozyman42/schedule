@@ -1,0 +1,79 @@
+{
+  "sourceRoot": "apps/schedule/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/schedule",
+        "index": "apps/schedule/src/index.html",
+        "baseHref": "/",
+        "main": "apps/schedule/src/main.tsx",
+        "polyfills": "apps/schedule/src/polyfills.ts",
+        "tsConfig": "apps/schedule/tsconfig.app.json",
+        "assets": ["apps/schedule/src/favicon.ico", "apps/schedule/src/assets"],
+        "styles": [],
+        "scripts": [],
+        "webpackConfig": "@nrwl/react/plugins/webpack"
+      },
+      "configurations": {
+        "development": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/schedule/src/environments/environment.ts",
+              "with": "apps/schedule/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/web:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "schedule:build",
+        "hmr": true
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "schedule:build:development"
+        },
+        "production": {
+          "buildTarget": "schedule:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/schedule/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/schedule"],
+      "options": {
+        "jestConfig": "apps/schedule/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

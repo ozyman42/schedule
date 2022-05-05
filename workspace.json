@@ -1,0 +1,7 @@
+{
+  "version": 2,
+  "projects": {
+    "schedule": "apps/schedule",
+    "schedule-e2e": "apps/schedule-e2e"
+  }
+}
